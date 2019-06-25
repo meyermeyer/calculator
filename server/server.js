@@ -7,8 +7,14 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Require Routes
+const calculatorRouter = require('./routes/calculator.router')
+
 // Serve static files
 app.use(express.static('build'));
+
+//Routes
+app.use('/api/calculator', calculatorRouter)
 
 // App Set //
 const PORT = process.env.PORT || 5000;
