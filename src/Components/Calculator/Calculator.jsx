@@ -50,17 +50,30 @@ class Calculator extends Component{
         
     }
 
+    handleClear = () =>{
+        console.log('in handleClear')
+        this.setState({
+            valueA:[],
+            valueB:[],
+            operator:''
+        })
+    }
+
+
     render(){
         console.log('state', this.state)
         return(
             <Grid container spacing={2}>
                 <Grid container item xs={4} spacing={2}>
-                    <Grid item xs={12}>
+                    <Grid item xs={9}>
                         <Card>
                             <CardContent>
                                 {this.state.valueA} {this.state.operator} {this.state.valueB}
                         </CardContent>
                         </Card>
+                    </Grid>
+                    <Grid item xs={3}>
+                        <Button variant="contained" onClick={this.handleClear} >C</Button>
                     </Grid>
                     <Grid container item spacing={1}>
                         <Grid item xs={3}>
@@ -104,18 +117,18 @@ class Calculator extends Component{
                             <Button variant="contained" onClick={() => { this.handleClickFor('-') }}>-</Button>
                         </Grid>
                     </Grid>
-                    <Grid container item spacing={1}>
-                        <Grid item s={3}>
-                            <Button variant="contained" onClick={this.handleSubmit}>=</Button>
-                        </Grid>
+                    <Grid container item spacing={1}>                        
                         <Grid item xs={3}>
                             <Button variant="contained" onClick={() => { this.handleClickFor(0) }}>0</Button>
                         </Grid>
                         <Grid item xs={3}>
                             <Button variant="contained" onClick={() => { this.handleClickFor('.') }}>.</Button>
                         </Grid>
-                        <Grid item s={3}>
+                        <Grid item xs={3}>
                             <Button variant="contained" onClick={() => { this.handleClickFor('+') }}>+</Button>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <Button variant="contained" onClick={this.handleSubmit}>=</Button>
                         </Grid>
                     </Grid>
                 </Grid>               
