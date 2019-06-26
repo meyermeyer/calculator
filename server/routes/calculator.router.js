@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 let calculationHistory = [{a:1,b:2,operator:'-',result:-1}]
-let result
+
 
 router.get('/', (req, res) => {
     res.send(calculationHistory)
@@ -13,14 +13,19 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
     calculateValue(req.body)
+    res.sendStatus(201)
     
 });
 
 const calculateValue = (calculationData) => {
     let a = calculationData.a
     let b = calculationData.b
+    let operator = calculationData.operator
+    let result
 
-    switch (calculationData.operator) {
+    console.log('calculate value', a, b, operator)
+
+    switch (operator) {
         case '+':
             result = a + b
         case '-':
@@ -30,6 +35,9 @@ const calculateValue = (calculationData) => {
         case '/':
             result = a / b
     }
+
+   
+    console.log('result', result)
     calculationHistory.push({
         a: a,
         b: b,
