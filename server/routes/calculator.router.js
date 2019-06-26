@@ -18,8 +18,8 @@ router.post('/', (req, res) => {
 });
 
 const calculateValue = (calculationData) => {
-    let a = calculationData.a
-    let b = calculationData.b
+    let a = parseFloat(calculationData.valueA)
+    let b = parseFloat(calculationData.valueB)
     let operator = calculationData.operator
     let result
 
