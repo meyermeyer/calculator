@@ -5,17 +5,18 @@ import {Grid, Button, Card, CardContent} from '@material-ui/core'
 
 class Calculator extends Component{
     state={
-        valueA: [],
-        valueB: [],
+        valueA: '',
+        valueB: '',
         operator: ''
     }
     
     handleSubmit = () => {
-        console.log('submit', parseFloat(this.state.valueA))
         this.props.dispatch({type:'SUBMIT_CALCULATION', 
                             payload:
                                 {
-
+                                    valueA: this.state.valueA,
+                                    valueB: this.state.valueB,
+                                    operator: this.state.operator
                                 }
                             })
     }
@@ -33,7 +34,7 @@ class Calculator extends Component{
         //if no operator has been set, number inputs affect valueA
         else if (!this.state.operator){
             console.log('number', param)
-            let a = [...this.state.valueA, param]
+            let a = this.state.valueA+param
             this.setState({
                 ...this.state,
                 valueA: a
@@ -41,7 +42,7 @@ class Calculator extends Component{
         }
         //once operator is selected, buttons effect valueB
         else {
-            let b = [...this.state.valueB, param]
+            let b = this.state.valueB+param
             this.setState({
                 ...this.state,
                 valueB: b
@@ -50,6 +51,7 @@ class Calculator extends Component{
         
     }
 
+    //clear calculation from DOM
     handleClear = () =>{
         console.log('in handleClear')
         this.setState({
@@ -77,13 +79,13 @@ class Calculator extends Component{
                     </Grid>
                     <Grid container item spacing={1}>
                         <Grid item xs={3}>
-                            <Button variant="contained" onClick={() => { this.handleClickFor(7) }}>7</Button>
+                            <Button variant="contained" onClick={() => { this.handleClickFor('7') }}>7</Button>
                         </Grid>
                         <Grid item xs={3}>
-                            <Button variant="contained" onClick={() => { this.handleClickFor(8) }}>8</Button>
+                            <Button variant="contained" onClick={() => { this.handleClickFor('8') }}>8</Button>
                         </Grid>
                         <Grid item xs={3}>
-                            <Button variant="contained" onClick={() => { this.handleClickFor(9) }}>9</Button>
+                            <Button variant="contained" onClick={() => { this.handleClickFor('9') }}>9</Button>
                         </Grid>
                         <Grid item xs={3}>
                             <Button variant="contained" onClick={() => { this.handleClickFor('/') }}>/</Button>
@@ -91,13 +93,13 @@ class Calculator extends Component{
                     </Grid>
                     <Grid container item spacing={1}>
                         <Grid item xs={3}>
-                            <Button variant="contained" onClick={() => { this.handleClickFor(4) }}>4</Button>
+                            <Button variant="contained" onClick={() => { this.handleClickFor('4') }}>4</Button>
                         </Grid>
                         <Grid item xs={3}>
-                            <Button variant="contained" onClick={() => { this.handleClickFor(5) }}>5</Button>
+                            <Button variant="contained" onClick={() => { this.handleClickFor('5') }}>5</Button>
                         </Grid>
                         <Grid item xs={3}>
-                            <Button variant="contained" onClick={() => { this.handleClickFor(6) }}>6</Button>
+                            <Button variant="contained" onClick={() => { this.handleClickFor('6') }}>6</Button>
                         </Grid>
                         <Grid item xs={3}>
                             <Button variant="contained" onClick={() => { this.handleClickFor('x') }}>x</Button>
@@ -105,13 +107,13 @@ class Calculator extends Component{
                     </Grid>
                     <Grid container item spacing={1}>
                         <Grid item xs={3}>
-                            <Button variant="contained" onClick={() => { this.handleClickFor(1) }}>1</Button>
+                            <Button variant="contained" onClick={() => { this.handleClickFor('1') }}>1</Button>
                         </Grid>
                         <Grid item xs={3}>
-                            <Button variant="contained" onClick={() => { this.handleClickFor(2) }}>2</Button>
+                            <Button variant="contained" onClick={() => { this.handleClickFor('2') }}>2</Button>
                         </Grid>
                         <Grid item xs={3}>
-                            <Button variant="contained" onClick={() => { this.handleClickFor(3) }}>3</Button>
+                            <Button variant="contained" onClick={() => { this.handleClickFor('3') }}>3</Button>
                         </Grid>
                         <Grid item xs={3}>
                             <Button variant="contained" onClick={() => { this.handleClickFor('-') }}>-</Button>
@@ -119,7 +121,7 @@ class Calculator extends Component{
                     </Grid>
                     <Grid container item spacing={1}>                        
                         <Grid item xs={3}>
-                            <Button variant="contained" onClick={() => { this.handleClickFor(0) }}>0</Button>
+                            <Button variant="contained" onClick={() => { this.handleClickFor('0') }}>0</Button>
                         </Grid>
                         <Grid item xs={3}>
                             <Button variant="contained" onClick={() => { this.handleClickFor('.') }}>.</Button>
