@@ -68,7 +68,11 @@ class Calculator extends Component{
     }
 
     componentDidMount(){
-        this.props.dispatch({ type: 'FETCH_CALCULATION' })
+        //fetch calculation every second so page shows up to date calc history
+        setInterval(() => {
+            this.props.dispatch({ type: 'FETCH_CALCULATION' })
+        }, 1000);
+        
     }
 
     render(){       
