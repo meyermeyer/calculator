@@ -19,6 +19,11 @@ class Calculator extends Component{
                                     operator: this.state.operator
                                 }
                             })
+        this.setState({
+            valueA: '',
+            valueB: '',
+            operator: ''
+        })                   
     }
 
     handleClickFor(param){
@@ -61,8 +66,11 @@ class Calculator extends Component{
         })
     }
 
+    componentDidMount(){
+        this.props.dispatch({ type: 'FETCH_CALCULATION' })
+    }
 
-    render(){
+    render(){       
         console.log('state', this.state)
         return(
             <Grid container spacing={2}>

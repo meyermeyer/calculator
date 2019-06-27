@@ -7,15 +7,29 @@ function* submitCalculation(action) {
 
     try {
         yield axios.post('/api/calculator', action.payload)
+        yield put({type:'FETCH_CALCULATION'})
 
     } 
     catch (error) {
-        
+        console.log('error in submitCalculation saga', error)
     }
 }
 
+function* fetchCalculation() {
+    console.log('in fetchCalculation')
+    try {
+        let allCalculations = yield axios.get('/api/calculator')
+        yield put({type:'STORE_CALCULATIONS', payload: allCalculations.data})
+    }
+    catch(error){
+        console.log('error in fetchCalculation', error)
+    }
+}
+
+
 function* calculationSaga() {
     yield takeEvery('SUBMIT_CALCULATION', submitCalculation);
+    yield takeEvery('FETCH_CALCULATION', fetchCalculation)
 }
 
 export default calculationSaga;
