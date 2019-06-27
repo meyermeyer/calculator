@@ -11,14 +11,15 @@ class Calculator extends Component{
     }
     
     handleSubmit = () => {
-        this.props.dispatch({type:'SUBMIT_CALCULATION', 
-                            payload:
-                                {
-                                    valueA: this.state.valueA,
-                                    valueB: this.state.valueB,
-                                    operator: this.state.operator
-                                }
-                            })
+        this.props.dispatch({
+            type:'SUBMIT_CALCULATION', 
+            payload:
+                {
+                    valueA: this.state.valueA,
+                    valueB: this.state.valueB,
+                    operator: this.state.operator
+                }
+        })
         this.setState({
             valueA: '',
             valueB: '',
@@ -74,7 +75,7 @@ class Calculator extends Component{
         console.log('state', this.state)
         return(
             <Grid container spacing={2}>
-                <Grid container item xs={4} spacing={2}>
+                <Grid container item spacing={2}>
                     <Grid item xs={9}>
                         <Card>
                             <CardContent>
